@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact and Quote Request | SK Motors</title>
+  <meta name="description" content="Contact SK Motors for mobile mechanic support in SW London. Call, WhatsApp, or submit a quick quote request.">
+  <meta name="theme-color" content="#0b0d12">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Contact SK Motors">
+  <meta property="og:description" content="Call, WhatsApp, or submit a quick quote request for mobile car and van mechanical services.">
+  <meta property="og:image" content="assets/img/og-image.jpg">
+  <meta property="og:url" content="/contact.html">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="assets/css/styles.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <script src="assets/js/site-config.js" defer></script>
+  <script src="assets/js/main.js" defer></script>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" defer></script>
+  <script src="assets/js/coverage-map.js" defer></script>
+  <script src="assets/js/contact-form.js" defer></script>
+  <script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token":"YOUR_CLOUDFLARE_WEB_ANALYTICS_TOKEN"}'></script>
+</head>
+<body data-page="contact">
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="index.html" aria-label="SK Motors home">
+        <img src="assets/img/logo-text.svg" alt="SK Motors logo">
+      </a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" data-nav-toggle>
+        Menu
+      </button>
+      <nav class="site-nav" id="site-nav" aria-label="Main navigation">
+        <ul class="nav-list">
+          <li><a href="index.html" data-nav="home">Home</a></li>
+          <li><a href="services.html" data-nav="services">Services</a></li>
+          <li><a href="reviews.html" data-nav="reviews">Reviews</a></li>
+          <li><a href="contact.html" data-nav="contact">Contact</a></li>
+        </ul>
+      </nav>
+      <div class="header-quick">
+        <a class="btn btn-sm btn-call" data-link="call" href="tel:+447873829056">Call</a>
+        <a class="btn btn-sm btn-whatsapp" data-link="whatsapp" href="https://wa.me/447873829056">WhatsApp</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="main-content">
+    <section class="page-hero section">
+      <div class="container" data-reveal>
+        <p class="kicker">Book support</p>
+        <h1>Contact SK Motors</h1>
+        <p class="lead">
+          Reach out for a no-obligation quote. Send the details and get practical guidance for your car or van issue.
+        </p>
+        <div class="cta-row">
+          <a class="btn btn-call" data-link="call" href="tel:+447873829056">Call Now</a>
+          <a class="btn btn-whatsapp" data-link="whatsapp" href="https://wa.me/447873829056">WhatsApp</a>
+          <a class="btn btn-outline" href="#quote-form">Send Quote Details</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container contact-layout">
+        <div class="contact-cards" data-reveal>
+          <article class="panel-card">
+            <h2>Phone</h2>
+            <p><a data-link="call" href="tel:+447873829056"><span data-config="phoneDisplay"></span></a></p>
+          </article>
+          <article class="panel-card">
+            <h2>Email</h2>
+            <p><a data-link="mailto" href="mailto:skmotorservices.uk@gmail.com"><span data-config="email"></span></a></p>
+          </article>
+          <article class="panel-card">
+            <h2>Instagram</h2>
+            <p><a data-link="instagram" href="https://instagram.com/skmotorservices" target="_blank" rel="noopener">@skmotorservices</a></p>
+          </article>
+          <article class="panel-card">
+            <h2>Coverage Base</h2>
+            <p><span data-config="postcode"></span> (South West London)</p>
+            <p class="panel-muted" data-config="responseWindowText"></p>
+          </article>
+        </div>
+
+        <section class="quote-form-wrap" data-reveal>
+          <h2 id="quote-form-heading">Quick quote request</h2>
+          <p>Fill this short form and we will open WhatsApp with your prefilled request.</p>
+          <form id="quote-form" aria-labelledby="quote-form-heading" novalidate>
+            <label for="name">Full name</label>
+            <input id="name" name="name" type="text" autocomplete="name" required>
+
+            <label for="phone">Phone number</label>
+            <input id="phone" name="phone" type="tel" autocomplete="tel" required>
+
+            <label for="postcode">Postcode</label>
+            <input id="postcode" name="postcode" type="text" autocomplete="postal-code" required>
+
+            <label for="vehicle">Vehicle (make/model or reg)</label>
+            <input id="vehicle" name="vehicle" type="text" required>
+
+            <label for="issue">Issue details</label>
+            <textarea id="issue" name="issue" rows="4" required></textarea>
+
+            <button class="btn btn-whatsapp btn-submit" type="submit">Send via WhatsApp</button>
+            <p id="form-status" class="form-status" role="status" aria-live="polite"></p>
+          </form>
+        </section>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <h2 class="section-title" id="coverage-map" data-reveal>Coverage map</h2>
+        <figure class="map-figure" data-reveal>
+          <div id="coverage-map-detail" class="coverage-map coverage-map-detail" data-map-variant="detail" aria-label="Detailed South West London and surrounding areas coverage map"></div>
+          <noscript>
+            <picture>
+              <source srcset="assets/img/coverage-map.svg" type="image/svg+xml">
+              <img src="assets/img/coverage-map.png" alt="Map showing primary South West London coverage and surrounding areas up to around 45 minutes travel">
+            </picture>
+          </noscript>
+        </figure>
+        <div class="map-legend" data-reveal>
+          <p><span class="legend-dot legend-core"></span> <span data-config="coreCoverageLabel"></span></p>
+          <p><span class="legend-dot legend-surrounding"></span> <span data-config="surroundingCoverageLabel"></span></p>
+          <p><span class="legend-dot legend-outside"></span> Outside Priority Zone: All Other Postcode Areas.</p>
+          <p class="legend-list"><strong>Area Labels:</strong> Borough names remain on-map so coverage context is easy to read.</p>
+          <p class="legend-note">Coverage outside priority zones is still possible depending on route and schedule. Contact first to confirm availability.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container policy-grid">
+        <article class="panel-card" data-reveal>
+          <h2>Privacy summary</h2>
+          <p>Quote form data includes name, phone, postcode, vehicle details, and issue summary.</p>
+          <p>Data is used only to provide quote responses and booking communication.</p>
+          <p>Operational information is retained only as needed to deliver service and support follow-up.</p>
+          <p>For data requests, contact <a data-link="mailto" href="mailto:skmotorservices.uk@gmail.com"><span data-config="email"></span></a>.</p>
+        </article>
+        <article class="panel-card" data-reveal>
+          <h2>Company information</h2>
+          <p data-config="legalDisclosure"></p>
+          <p>Core location: <span data-config="postcode"></span></p>
+          <p>Profile: Mobile vehicle maintenance and repair support in South West London and nearby areas.</p>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div>
+        <p class="footer-title" data-config="businessName"></p>
+        <p class="footer-small">Mobile vehicle maintenance and mechanical support</p>
+        <p class="footer-small">In South West London.</p>
+      </div>
+      <div>
+        <p class="footer-title">Contact</p>
+        <p><a data-link="call" href="tel:+447873829056"><span data-config="phoneDisplay"></span></a></p>
+        <p><a data-link="mailto" href="mailto:skmotorservices.uk@gmail.com"><span data-config="email"></span></a></p>
+      </div>
+      <div>
+        <p class="footer-title">Follow</p>
+        <p><a data-link="instagram" href="https://instagram.com/skmotorservices" target="_blank" rel="noopener">Instagram</a></p>
+        <p><a data-link="googleReviews" href="https://www.google.com/search?sca_esv=e8cd867175193f88&sxsrf=ANbL-n4IErHl3_0QuHm6vzhPV8EHkqexqQ:1771744439544&si=AL3DRZEsmMGCryMMFSHJ3StBhOdZ2-6yYkXd_doETEE1OR-qOcUfKlZ6aNneJhPQWEXPXItOtehgXoJBknTtc8aaO1k6QfgojDG_60-AlRTkLy0JAD2er_x_CTyDebp3NDyEEpqMq4FQZn0A49i5jNJb29vJjdn3qQ%3D%3D&q=SK+MOTOR+SERVICES+UK+Reviews&sa=X&ved=2ahUKEwj-tc6vxuySAxX7OPsDHQqEML4Q0bkNegQIORAD&biw=1920&bih=919&dpr=1" target="_blank" rel="noopener">Google Reviews</a></p>
+      </div>
+    </div>
+    <div class="container footer-bottom">
+      <p>&copy; <span id="year"></span> <span data-config="businessName"></span></p>
+      <p data-config="legalDisclosure"></p>
+    </div>
+  </footer>
+
+  <div class="sticky-cta" aria-label="Quick contact actions">
+    <a data-link="call" href="tel:+447873829056">Call</a>
+    <a data-link="whatsapp" href="https://wa.me/447873829056">WhatsApp</a>
+    <a href="#quote-form">Quote</a>
+  </div>
+</body>
+</html>
