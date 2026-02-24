@@ -29,7 +29,7 @@
   <header class="site-header">
     <div class="container header-inner">
       <a class="brand" href="index.html" aria-label="SK Motors home">
-        <img src="assets/img/logo-text.svg" alt="SK Motors logo">
+        <img src="assets/img/logo-main.png" alt="SK Motors logo">
       </a>
       <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" data-nav-toggle>
         Menu
@@ -49,15 +49,15 @@
     </div>
   </header>
 
-  <main id="main-content">
+  <main id="main-content" class="page-shell">
     <section class="page-hero section">
-      <div class="container" data-reveal>
+      <div class="container section-shell content-rail" data-reveal data-reveal-style="slide-left">
         <p class="kicker">Book support</p>
         <h1>Contact SK Motors</h1>
         <p class="lead">
           Reach out for a no-obligation quote. Send the details and get practical guidance for your car or van issue.
         </p>
-        <div class="cta-row">
+        <div class="cta-row cta-cluster">
           <a class="btn btn-call" data-link="call" href="tel:+447873829056">Call Now</a>
           <a class="btn btn-whatsapp" data-link="whatsapp" href="https://wa.me/447873829056">WhatsApp</a>
           <a class="btn btn-outline" href="#quote-form">Send Quote Details</a>
@@ -66,28 +66,40 @@
     </section>
 
     <section class="section">
-      <div class="container contact-layout">
-        <div class="contact-cards" data-reveal>
-          <article class="panel-card">
-            <h2>Phone</h2>
-            <p><a data-link="call" href="tel:+447873829056"><span data-config="phoneDisplay"></span></a></p>
-          </article>
-          <article class="panel-card">
-            <h2>Email</h2>
-            <p><a data-link="mailto" href="mailto:skmotorservices.uk@gmail.com"><span data-config="email"></span></a></p>
-          </article>
-          <article class="panel-card">
-            <h2>Instagram</h2>
-            <p><a data-link="instagram" href="https://instagram.com/skmotorservices" target="_blank" rel="noopener">@skmotorservices</a></p>
-          </article>
-          <article class="panel-card">
-            <h2>Coverage Base</h2>
-            <p><span data-config="postcode"></span> (South West London)</p>
-            <p class="panel-muted" data-config="responseWindowText"></p>
-          </article>
+      <div class="container section-shell contact-layout">
+        <div class="contact-rail">
+          <div class="contact-cards" data-reveal data-reveal-style="slide-left">
+            <article class="panel-card" data-reveal data-reveal-style="scale">
+              <h2>Phone</h2>
+              <p><a data-link="call" href="tel:+447873829056"><span data-config="phoneDisplay"></span></a></p>
+            </article>
+            <article class="panel-card" data-reveal data-reveal-style="scale">
+              <h2>Email</h2>
+              <p><a data-link="mailto" href="mailto:skmotorservices.uk@gmail.com"><span data-config="email"></span></a></p>
+            </article>
+            <article class="panel-card" data-reveal data-reveal-style="scale">
+              <h2>Instagram</h2>
+              <p><a data-link="instagram" href="https://instagram.com/skmotorservices" target="_blank" rel="noopener">@skmotorservices</a></p>
+            </article>
+            <article class="panel-card" data-reveal data-reveal-style="scale">
+              <h2>Coverage Base</h2>
+              <p><span data-config="postcode"></span> (South West London)</p>
+              <p class="panel-muted" data-config="responseWindowText"></p>
+            </article>
+          </div>
+
+          <aside class="contact-accent-panel" data-reveal data-reveal-style="lift" aria-label="Request guidance">
+            <h2 class="contact-accent-title">Before you send your request</h2>
+            <ul class="contact-accent-list">
+              <li>Include your vehicle details, issue summary, and postcode so we can assess the job accurately.</li>
+              <li>Primary coverage is South West London, with surrounding areas available based on route and schedule.</li>
+              <li>Most quote requests receive a response within 12 hours.</li>
+            </ul>
+            <a class="contact-accent-link" href="#quote-form">Go to quote form</a>
+          </aside>
         </div>
 
-        <section class="quote-form-wrap" data-reveal>
+        <section class="quote-form-wrap" data-reveal data-reveal-style="slide-right">
           <h2 id="quote-form-heading">Quick quote request</h2>
           <p>Fill this short form and we will open WhatsApp with your prefilled request.</p>
           <form id="quote-form" aria-labelledby="quote-form-heading" novalidate>
@@ -114,9 +126,9 @@
     </section>
 
     <section class="section">
-      <div class="container">
-        <h2 class="section-title" id="coverage-map" data-reveal>Coverage map</h2>
-        <figure class="map-figure" data-reveal>
+      <div class="container map-shell">
+        <h2 class="section-title" id="coverage-map" data-reveal data-reveal-style="slide-left">Coverage map</h2>
+        <figure class="map-figure" data-reveal data-reveal-style="slide-right">
           <div id="coverage-map-detail" class="coverage-map coverage-map-detail" data-map-variant="detail" aria-label="Detailed South West London and surrounding areas coverage map"></div>
           <noscript>
             <picture>
@@ -125,31 +137,32 @@
             </picture>
           </noscript>
         </figure>
-        <div class="map-legend" data-reveal>
+        <div class="map-legend" data-reveal data-reveal-style="lift">
           <p><span class="legend-dot legend-core"></span> <span data-config="coreCoverageLabel"></span></p>
           <p><span class="legend-dot legend-surrounding"></span> <span data-config="surroundingCoverageLabel"></span></p>
-          <p><span class="legend-dot legend-outside"></span> Outside Priority Zone: All Other Postcode Areas.</p>
-          <p class="legend-list"><strong>Area Labels:</strong> Borough names remain on-map so coverage context is easy to read.</p>
+          <p><span class="legend-dot legend-outside"></span> Outside of priority area: All other areas shown on the base map.</p>
           <p class="legend-note">Coverage outside priority zones is still possible depending on route and schedule. Contact first to confirm availability.</p>
         </div>
       </div>
     </section>
 
     <section class="section">
-      <div class="container policy-grid">
-        <article class="panel-card" data-reveal>
-          <h2>Privacy summary</h2>
-          <p>Quote form data includes name, phone, postcode, vehicle details, and issue summary.</p>
-          <p>Data is used only to provide quote responses and booking communication.</p>
-          <p>Operational information is retained only as needed to deliver service and support follow-up.</p>
-          <p>For data requests, contact <a data-link="mailto" href="mailto:skmotorservices.uk@gmail.com"><span data-config="email"></span></a>.</p>
-        </article>
-        <article class="panel-card" data-reveal>
-          <h2>Company information</h2>
-          <p data-config="legalDisclosure"></p>
-          <p>Core location: <span data-config="postcode"></span></p>
-          <p>Profile: Mobile vehicle maintenance and repair support in South West London and nearby areas.</p>
-        </article>
+      <div class="container section-shell">
+        <div class="policy-grid">
+          <article class="panel-card" data-reveal data-reveal-style="lift">
+            <h2>Privacy summary</h2>
+            <p>Quote form data includes name, phone, postcode, vehicle details, and issue summary.</p>
+            <p>Data is used only to provide quote responses and booking communication.</p>
+            <p>Operational information is retained only as needed to deliver service and support follow-up.</p>
+            <p>For data requests, contact <a data-link="mailto" href="mailto:skmotorservices.uk@gmail.com"><span data-config="email"></span></a>.</p>
+          </article>
+          <article class="panel-card" data-reveal data-reveal-style="lift">
+            <h2>Company information</h2>
+            <p data-config="legalDisclosure"></p>
+            <p>Core location: <span data-config="postcode"></span></p>
+            <p>Profile: Mobile vehicle maintenance and repair support in South West London and nearby areas.</p>
+          </article>
+        </div>
       </div>
     </section>
   </main>

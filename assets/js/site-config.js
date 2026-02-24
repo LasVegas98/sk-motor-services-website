@@ -35,14 +35,14 @@
     postcode: "SW11 3GU",
     responseWindowText: "24-hour contact, usually responds within 12 hours.",
     legalDisclosure: "SK Motors is a trading name for PEAK TIME SOLUTIONS LTD (16183305).",
-    coreCoverageLabel: "Primary Coverage: All SW Postcodes.",
-    surroundingCoverageLabel: "Surrounding Coverage: CR, SM, KT, and SE Postcodes (subject to availability)."
+    coreCoverageLabel: "Primary Coverage: South West London Area.",
+    surroundingCoverageLabel: "Surrounding Areas Coverage: CR, SM, KT, SE, TW, and BR Postcodes (subject to availability)."
   };
 
   /** @type {ReviewSnippet[]} */
   var reviewSnippets = [
     {
-      reviewer: "M Kay",
+      reviewer: "M. Kay",
       source: "Google",
       rating: 5,
       quote: "Great service. The mechanic knows what he is doing. Very dedicated, and my car was serviced with spark plugs replaced in reasonable time."

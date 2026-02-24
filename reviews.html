@@ -25,7 +25,7 @@
   <header class="site-header">
     <div class="container header-inner">
       <a class="brand" href="index.html" aria-label="SK Motors home">
-        <img src="assets/img/logo-text.svg" alt="SK Motors logo">
+        <img src="assets/img/logo-main.png" alt="SK Motors logo">
       </a>
       <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" data-nav-toggle>
         Menu
@@ -45,9 +45,9 @@
     </div>
   </header>
 
-  <main id="main-content">
+  <main id="main-content" class="page-shell">
     <section class="page-hero section">
-      <div class="container" data-reveal>
+      <div class="container section-shell content-rail" data-reveal data-reveal-style="slide-left">
         <p class="kicker">Customer feedback</p>
         <h1>5.0-star rated service</h1>
         <p class="lead">
@@ -57,9 +57,9 @@
     </section>
 
     <section class="section">
-      <div class="container">
-        <div class="rating-summary" data-reveal>
-          <p class="rating-main">5.0 <span aria-hidden="true">★★★★★</span></p>
+      <div class="container section-shell">
+        <div class="rating-summary" data-reveal data-reveal-style="scale">
+          <p class="rating-main">5.0 <span aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</span></p>
           <p class="rating-sub"><span data-review-count>6</span> verified Google reviews</p>
           <a class="btn btn-outline" data-link="googleReviews" href="https://www.google.com/search?sca_esv=e8cd867175193f88&sxsrf=ANbL-n4IErHl3_0QuHm6vzhPV8EHkqexqQ:1771744439544&si=AL3DRZEsmMGCryMMFSHJ3StBhOdZ2-6yYkXd_doETEE1OR-qOcUfKlZ6aNneJhPQWEXPXItOtehgXoJBknTtc8aaO1k6QfgojDG_60-AlRTkLy0JAD2er_x_CTyDebp3NDyEEpqMq4FQZn0A49i5jNJb29vJjdn3qQ%3D%3D&q=SK+MOTOR+SERVICES+UK+Reviews&sa=X&ved=2ahUKEwj-tc6vxuySAxX7OPsDHQqEML4Q0bkNegQIORAD&biw=1920&bih=919&dpr=1" target="_blank" rel="noopener">Read all reviews on Google</a>
         </div>
@@ -67,19 +67,21 @@
     </section>
 
     <section class="section">
-      <div class="container">
+      <div class="container section-shell review-grid-shell">
         <div class="review-grid" id="reviews-grid"></div>
       </div>
     </section>
 
     <section class="section cta-strip">
-      <div class="container cta-strip-inner" data-reveal>
-        <h2>Need reliable mechanical support?</h2>
-        <p>Call or WhatsApp for a quick response and practical guidance.</p>
-        <div class="cta-row">
-          <a class="btn btn-call" data-link="call" href="tel:+447873829056">Call <span data-config="phoneDisplay"></span></a>
-          <a class="btn btn-whatsapp" data-link="whatsapp" href="https://wa.me/447873829056">Message on WhatsApp</a>
-          <a class="btn btn-outline" href="contact.html#quote-form">Get quote</a>
+      <div class="container">
+        <div class="cta-strip-inner section-shell" data-reveal data-reveal-style="scale">
+          <h2>Need reliable mechanical support?</h2>
+          <p>Call or WhatsApp for a quick response and practical guidance.</p>
+          <div class="cta-row cta-cluster">
+            <a class="btn btn-call" data-link="call" href="tel:+447873829056">Call <span data-config="phoneDisplay"></span></a>
+            <a class="btn btn-whatsapp" data-link="whatsapp" href="https://wa.me/447873829056">Message on WhatsApp</a>
+            <a class="btn btn-outline" href="contact.html#quote-form">Get quote</a>
+          </div>
         </div>
       </div>
     </section>
