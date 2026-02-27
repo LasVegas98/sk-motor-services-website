@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Vehicle Services for Cars and Vans | SK Motors</title>
-  <meta name="description" content="Explore mobile mechanic services from SK Motors, including servicing, diagnostics, repairs, brakes, electrical support, and van mechanical work.">
+  <title>Vehicle Services for Cars and Vans | SK Motor Services UK</title>
+  <meta name="description" content="Explore mobile mechanic services from SK Motor Services UK, including servicing, diagnostics, repairs, brakes, electrical support, MOT pick-up and drop-off, and van mechanical work across the primary coverage zone.">
   <meta name="theme-color" content="#0b0d12">
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Services | SK Motors">
-  <meta property="og:description" content="Mobile car and van mechanical services across South West London and surrounding areas.">
+  <meta property="og:title" content="Services | SK Motor Services UK">
+  <meta property="og:description" content="Mobile car and van mechanical services with primary coverage in Brixton, Wandsworth, Mitcham, Sutton, Morden, Cheam, New Malden, and Epsom.">
   <meta property="og:image" content="assets/img/og-image.jpg">
   <meta property="og:url" content="/services.html">
   <meta name="twitter:card" content="summary_large_image">
@@ -17,15 +17,28 @@
   <link rel="stylesheet" href="assets/css/styles.css">
   <script src="assets/js/site-config.js" defer></script>
   <script src="assets/js/main.js" defer></script>
-  <script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token":"YOUR_CLOUDFLARE_WEB_ANALYTICS_TOKEN"}'></script>
+  <script>
+    (function () {
+      var token = "YOUR_CLOUDFLARE_WEB_ANALYTICS_TOKEN";
+      if (!token || token === "YOUR_CLOUDFLARE_WEB_ANALYTICS_TOKEN") {
+        return;
+      }
+
+      var script = document.createElement("script");
+      script.defer = true;
+      script.src = "https://static.cloudflareinsights.com/beacon.min.js";
+      script.setAttribute("data-cf-beacon", JSON.stringify({ token: token }));
+      document.head.appendChild(script);
+    })();
+  </script>
 </head>
 <body data-page="services">
   <a class="skip-link" href="#main-content">Skip to main content</a>
 
   <header class="site-header">
     <div class="container header-inner">
-      <a class="brand" href="index.html" aria-label="SK Motors home">
-        <img src="assets/img/logo-main.png" alt="SK Motors logo">
+      <a class="brand" href="index.html" aria-label="SK Motor Services UK home">
+        <img src="assets/img/logo-main.png" alt="SK Motor Services UK">
       </a>
       <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" data-nav-toggle>
         Menu
@@ -51,7 +64,7 @@
         <p class="kicker">Services</p>
         <h1>Mobile mechanical support for cars and vans</h1>
         <p class="lead">
-          We provide reliable mobile mechanic services across South West London, with surrounding areas covered subject to route and availability.
+          We provide reliable mobile mechanic services with primary coverage in Brixton, Wandsworth, Mitcham, Sutton, Morden, Cheam, New Malden, and Epsom.
         </p>
         <div class="cta-row cta-cluster">
           <a class="btn btn-call" data-link="call" href="tel:+447873829056">Call Now</a>
@@ -97,6 +110,27 @@
             <h3>Light Commercial Van Work</h3>
             <p>Servicing and mechanical repairs for light commercial vans, planned to help minimise downtime and keep you moving.</p>
           </article>
+          <article class="service-card" data-reveal data-reveal-style="lift">
+            <h3>MOT Pick-Up & Drop-Off</h3>
+            <p>MOT testing at our location via pick-up & drop-off service. Insured transportation included.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container section-shell">
+        <h2 class="section-title" data-reveal data-reveal-style="slide-left">Service assurances</h2>
+        <div class="policy-grid">
+          <article class="panel-card" data-reveal data-reveal-style="lift">
+            <p>All work is carried out to industry standards using manufacturer-approved parts.</p>
+          </article>
+          <article class="panel-card" data-reveal data-reveal-style="lift">
+            <p>All parts are covered by a 1-year warranty.</p>
+          </article>
+          <article class="panel-card" data-reveal data-reveal-style="lift">
+            <p>Vehicles, the public, and our technician are fully insured while working at your location.</p>
+          </article>
         </div>
       </div>
     </section>
@@ -111,7 +145,7 @@
           </article>
           <article class="panel-card" data-reveal data-reveal-style="scale">
             <h3>2. Get a clear quote</h3>
-            <p>We provide a straightforward quote based on the likely work, your location, and expected parts and labour.</p>
+            <p>We provide a straightforward quote based on your location, the work required, parts cost, and workmanship hours.</p>
           </article>
           <article class="panel-card" data-reveal data-reveal-style="scale">
             <h3>3. Book a convenient slot</h3>
@@ -167,3 +201,5 @@
   </div>
 </body>
 </html>
+
+

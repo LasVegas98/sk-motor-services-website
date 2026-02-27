@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Contact and Quote Request | SK Motors</title>
-  <meta name="description" content="Contact SK Motors for mobile mechanic support in SW London. Call, WhatsApp, or submit a quick quote request.">
+  <title>Contact and Quote Request | SK Motor Services UK</title>
+  <meta name="description" content="Contact SK Motor Services UK for mobile mechanic support with primary coverage in Brixton, Wandsworth, Mitcham, Sutton, Morden, Cheam, New Malden, and Epsom. Call, WhatsApp, or submit a quick quote request.">
   <meta name="theme-color" content="#0b0d12">
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Contact SK Motors">
+  <meta property="og:title" content="Contact SK Motor Services UK">
   <meta property="og:description" content="Call, WhatsApp, or submit a quick quote request for mobile car and van mechanical services.">
   <meta property="og:image" content="assets/img/og-image.jpg">
   <meta property="og:url" content="/contact.html">
@@ -21,15 +21,28 @@
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" defer></script>
   <script src="assets/js/coverage-map.js" defer></script>
   <script src="assets/js/contact-form.js" defer></script>
-  <script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token":"YOUR_CLOUDFLARE_WEB_ANALYTICS_TOKEN"}'></script>
+  <script>
+    (function () {
+      var token = "YOUR_CLOUDFLARE_WEB_ANALYTICS_TOKEN";
+      if (!token || token === "YOUR_CLOUDFLARE_WEB_ANALYTICS_TOKEN") {
+        return;
+      }
+
+      var script = document.createElement("script");
+      script.defer = true;
+      script.src = "https://static.cloudflareinsights.com/beacon.min.js";
+      script.setAttribute("data-cf-beacon", JSON.stringify({ token: token }));
+      document.head.appendChild(script);
+    })();
+  </script>
 </head>
 <body data-page="contact">
   <a class="skip-link" href="#main-content">Skip to main content</a>
 
   <header class="site-header">
     <div class="container header-inner">
-      <a class="brand" href="index.html" aria-label="SK Motors home">
-        <img src="assets/img/logo-main.png" alt="SK Motors logo">
+      <a class="brand" href="index.html" aria-label="SK Motor Services UK home">
+        <img src="assets/img/logo-main.png" alt="SK Motor Services UK">
       </a>
       <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" data-nav-toggle>
         Menu
@@ -53,7 +66,7 @@
     <section class="page-hero section">
       <div class="container section-shell content-rail" data-reveal data-reveal-style="slide-left">
         <p class="kicker">Book support</p>
-        <h1>Contact SK Motors</h1>
+        <h1>Contact SK Motor Services UK</h1>
         <p class="lead">
           Reach out for a no-obligation quote. Send the details and get practical guidance for your car or van issue.
         </p>
@@ -83,7 +96,7 @@
             </article>
             <article class="panel-card" data-reveal data-reveal-style="scale">
               <h2>Coverage Base</h2>
-              <p><span data-config="postcode"></span> (South West London)</p>
+              <p><span data-config="postcode"></span></p>
               <p class="panel-muted" data-config="responseWindowText"></p>
             </article>
           </div>
@@ -92,8 +105,8 @@
             <h2 class="contact-accent-title">Before you send your request</h2>
             <ul class="contact-accent-list">
               <li>Include your vehicle details, issue summary, and postcode so we can assess the job accurately.</li>
-              <li>Primary coverage is South West London, with surrounding areas available based on route and schedule.</li>
-              <li>Most quote requests receive a response within 12 hours.</li>
+              <li>Primary coverage includes Brixton, Wandsworth, Mitcham, Sutton, Morden, Cheam, New Malden, and Epsom.</li>
+              <li>Most quote requests receive a response within 1 hour.</li>
             </ul>
             <a class="contact-accent-link" href="#quote-form">Go to quote form</a>
           </aside>
@@ -129,19 +142,18 @@
       <div class="container map-shell">
         <h2 class="section-title" id="coverage-map" data-reveal data-reveal-style="slide-left">Coverage map</h2>
         <figure class="map-figure" data-reveal data-reveal-style="slide-right">
-          <div id="coverage-map-detail" class="coverage-map coverage-map-detail" data-map-variant="detail" aria-label="Detailed South West London and surrounding areas coverage map"></div>
+          <div id="coverage-map-detail" class="coverage-map coverage-map-detail" data-map-variant="detail" aria-label="Detailed coverage map showing primary coverage in Brixton, Wandsworth, Mitcham, Sutton, Morden, Cheam, New Malden, and Epsom, with all other locations marked as outside of priority area"></div>
           <noscript>
             <picture>
               <source srcset="assets/img/coverage-map.svg" type="image/svg+xml">
-              <img src="assets/img/coverage-map.png" alt="Map showing primary South West London coverage and surrounding areas up to around 45 minutes travel">
+              <img src="assets/img/coverage-map.png" alt="Map showing primary coverage in Brixton, Wandsworth, Mitcham, Sutton, Morden, Cheam, New Malden, and Epsom, with all other locations outside of priority area">
             </picture>
           </noscript>
         </figure>
         <div class="map-legend" data-reveal data-reveal-style="lift">
-          <p><span class="legend-dot legend-core"></span> <span data-config="coreCoverageLabel"></span></p>
-          <p><span class="legend-dot legend-surrounding"></span> <span data-config="surroundingCoverageLabel"></span></p>
-          <p><span class="legend-dot legend-outside"></span> Outside of priority area: All other areas shown on the base map.</p>
-          <p class="legend-note">Coverage outside priority zones is still possible depending on route and schedule. Contact first to confirm availability.</p>
+          <p><span class="legend-dot legend-core"></span> Primary Coverage</p>
+          <p><span class="legend-dot legend-outside"></span> Outside of Priority Area</p>
+          <p class="legend-note"><span data-config="coreCoverageLabel"></span> <span data-config="outsideCoverageLabel"></span></p>
         </div>
       </div>
     </section>
@@ -160,7 +172,7 @@
             <h2>Company information</h2>
             <p data-config="legalDisclosure"></p>
             <p>Core location: <span data-config="postcode"></span></p>
-            <p>Profile: Mobile vehicle maintenance and repair support in South West London and nearby areas.</p>
+            <p>Profile: Mobile vehicle maintenance and repair support with primary coverage in Brixton, Wandsworth, Mitcham, Sutton, Morden, Cheam, New Malden, and Epsom.</p>
           </article>
         </div>
       </div>
@@ -198,3 +210,5 @@
   </div>
 </body>
 </html>
+
+

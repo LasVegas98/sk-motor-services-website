@@ -171,16 +171,26 @@ textarea:focus-visible {
   box-shadow: var(--shadow-md);
   padding: clamp(1.2rem, 1rem + 1vw, 2rem);
   position: relative;
-  overflow: clip;
+  overflow: hidden;
 }
 
 .section-shell::after {
   content: "";
   position: absolute;
-  inset: auto -20% -45% auto;
-  width: 65%;
-  height: 75%;
-  background: radial-gradient(circle at 50% 50%, rgba(225, 29, 47, 0.18), transparent 70%);
+  right: -16%;
+  bottom: -42%;
+  width: min(62%, 460px);
+  aspect-ratio: 1 / 1;
+  border-radius: 999px;
+  background: radial-gradient(
+    circle at center,
+    rgba(225, 29, 47, 0.36) 0%,
+    rgba(225, 29, 47, 0.18) 34%,
+    rgba(225, 29, 47, 0.08) 54%,
+    rgba(225, 29, 47, 0) 78%
+  );
+  filter: blur(22px);
+  opacity: 0.82;
   pointer-events: none;
 }
 
@@ -239,29 +249,19 @@ body.is-scrolled .header-inner {
 
 .brand {
   width: clamp(190px, 22vw, 330px);
-  height: clamp(46px, 5.6vw, 64px);
   display: block;
-  overflow: hidden;
   position: relative;
 }
 
 .brand::after {
-  content: "";
-  position: absolute;
-  left: 4%;
-  right: 4%;
-  bottom: 2px;
-  height: 2px;
-  background: linear-gradient(90deg, transparent, rgba(225, 29, 47, 0.85), transparent);
-  opacity: 0.62;
-  pointer-events: none;
+  content: none;
 }
 
 .brand img {
   width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
+  height: auto;
+  object-fit: contain;
+  object-position: left center;
 }
 
 .site-nav {
@@ -733,6 +733,14 @@ body.is-scrolled .header-inner {
   grid-template-columns: repeat(auto-fit, minmax(245px, 1fr));
 }
 
+body[data-page="services"] .service-grid {
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+}
+
+body[data-page="services"] .service-card {
+  height: 100%;
+}
+
 .process-grid {
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
 }
@@ -747,7 +755,7 @@ body.is-scrolled .header-inner {
   max-width: none;
   margin-inline: auto;
   position: relative;
-  overflow: clip;
+  overflow: hidden;
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto;
   gap: 0.5rem 1.2rem;
@@ -757,11 +765,21 @@ body.is-scrolled .header-inner {
 .rating-summary::after {
   content: "";
   position: absolute;
-  inset: auto -12% -56% auto;
-  width: 52%;
-  height: 82%;
+  right: -12%;
+  bottom: -46%;
+  width: min(56%, 360px);
+  aspect-ratio: 1 / 1;
+  border-radius: 999px;
   pointer-events: none;
-  background: radial-gradient(circle at center, rgba(225, 29, 47, 0.22), transparent 72%);
+  background: radial-gradient(
+    circle at center,
+    rgba(225, 29, 47, 0.34) 0%,
+    rgba(225, 29, 47, 0.16) 34%,
+    rgba(225, 29, 47, 0.07) 52%,
+    rgba(225, 29, 47, 0) 76%
+  );
+  filter: blur(20px);
+  opacity: 0.8;
 }
 
 .rating-main {
@@ -818,7 +836,7 @@ body.is-scrolled .header-inner {
     linear-gradient(145deg, rgba(25, 36, 53, 0.9), rgba(11, 17, 26, 0.96));
   box-shadow: var(--shadow-md);
   position: relative;
-  overflow: clip;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
   flex: 1 1 auto;
@@ -827,11 +845,21 @@ body.is-scrolled .header-inner {
 .contact-accent-panel::after {
   content: "";
   position: absolute;
-  inset: auto -20% -48% auto;
-  width: 66%;
-  height: 74%;
+  right: -16%;
+  bottom: -44%;
+  width: min(62%, 360px);
+  aspect-ratio: 1 / 1;
+  border-radius: 999px;
   pointer-events: none;
-  background: radial-gradient(circle at center, rgba(225, 29, 47, 0.2), transparent 72%);
+  background: radial-gradient(
+    circle at center,
+    rgba(225, 29, 47, 0.34) 0%,
+    rgba(225, 29, 47, 0.17) 34%,
+    rgba(225, 29, 47, 0.08) 52%,
+    rgba(225, 29, 47, 0) 76%
+  );
+  filter: blur(22px);
+  opacity: 0.82;
 }
 
 .contact-accent-title {
@@ -1181,6 +1209,16 @@ body.is-scrolled .header-inner {
   .contact-cards {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
+
+  body[data-page="services"] .service-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1120px) {
+  body[data-page="services"] .service-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
 }
 
 @media (min-width: 1160px) {
@@ -1196,16 +1234,16 @@ body.is-scrolled .header-inner {
 }
 
 @media (max-width: 1080px) {
-  .brand {
-    width: clamp(176px, 30vw, 280px);
-  }
-}
-
-@media (max-width: 860px) {
   .header-quick {
     display: none;
   }
 
+  .brand {
+    width: clamp(188px, 30vw, 280px);
+  }
+}
+
+@media (max-width: 1024px) {
   .header-inner {
     min-height: 74px;
     grid-template-columns: auto auto;
@@ -1217,6 +1255,7 @@ body.is-scrolled .header-inner {
 
   .brand {
     grid-area: brand;
+    width: clamp(176px, 52vw, 260px);
   }
 
   .nav-toggle {

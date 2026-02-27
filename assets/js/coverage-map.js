@@ -2,27 +2,22 @@
   "use strict";
 
   var BOROUGH_DATA_URL = "assets/data/london-boroughs.geojson";
-  var POSTCODE_LAYER_CONFIG = [
-    { prefix: "SW", zone: "core", url: "assets/data/postcode-sw.geojson" },
-    { prefix: "CR", zone: "surrounding", url: "assets/data/postcode-cr.geojson" },
-    { prefix: "KT", zone: "surrounding", url: "assets/data/postcode-kt.geojson" },
-    { prefix: "SM", zone: "surrounding", url: "assets/data/postcode-sm.geojson" },
-    { prefix: "SE", zone: "surrounding", url: "assets/data/postcode-se.geojson" },
-    { prefix: "TW", zone: "surrounding", url: "assets/data/postcode-tw.geojson" },
-    { prefix: "BR", zone: "surrounding", url: "assets/data/postcode-br.geojson" }
-  ];
+  var PRIMARY_COVERAGE_DATA_URL = "assets/data/primary-coverage.geojson";
   var CORE_COLOR = "#d62828";
-  var SURROUNDING_COLOR = "#f07f7f";
   var OUTSIDE_COLOR = "#263246";
-  var SW11_COORDS = [51.463, -0.168];
-  var BIGGIN_HILL_CORRECTION_BBOX = {
-    minX: -0.01,
-    minY: 51.2885,
-    maxX: 0.1,
-    maxY: 51.338
-  };
-  var CORE_POSTCODE_PREFIXES = new Set(["SW"]);
-  var SURROUNDING_POSTCODE_PREFIXES = new Set(["CR", "SM", "KT", "SE", "TW", "BR"]);
+  var OUTSIDE_RING_PADDING_RATIO = 0.16;
+  var PRIMARY_COVERAGE_AREAS = "Brixton, Wandsworth, Mitcham, Sutton, Morden, Cheam, New Malden, Epsom";
+  var SERVICE_BASE_COORDS = [51.444, -0.154];
+  var COVERAGE_TOWNS = [
+    { name: "Brixton", coords: [51.4613, -0.1162] },
+    { name: "Wandsworth", coords: [51.4565, -0.1919] },
+    { name: "Mitcham", coords: [51.4032, -0.1685] },
+    { name: "Sutton", coords: [51.3618, -0.1945] },
+    { name: "Morden", coords: [51.4022, -0.1948] },
+    { name: "Cheam", coords: [51.3599, -0.2142] },
+    { name: "New Malden", coords: [51.4007, -0.2613] },
+    { name: "Epsom", coords: [51.333, -0.2698] }
+  ];
 
   document.addEventListener("DOMContentLoaded", function () {
     if (!window.L) {
@@ -38,7 +33,7 @@
     }
 
     var mapData = await loadMapData();
-    if (!mapData || !mapData.postcodeData) {
+    if (!mapData || !mapData.priorityData) {
       return;
     }
 
@@ -48,28 +43,21 @@
   }
 
   async function loadMapData() {
-    var postcodeFetches = POSTCODE_LAYER_CONFIG.map(function (config) {
-      return loadGeoData(config.url);
-    });
-
     var data = await Promise.all([
       loadGeoData(BOROUGH_DATA_URL),
-      Promise.all(postcodeFetches)
+      loadGeoData(PRIMARY_COVERAGE_DATA_URL)
     ]);
 
     var boroughData = data[0];
-    var postcodeCollections = data[1];
-    var postcodeData = mergePostcodeCollections(postcodeCollections);
-
-    if (!postcodeData) {
+    var priorityData = data[1];
+    if (!priorityData) {
       return null;
     }
 
-    applyBigginHillCorrection(postcodeData, boroughData);
-
     return {
       boroughData: boroughData,
-      postcodeData: postcodeData
+      priorityData: priorityData,
+      outsideData: createOutsideAreaData(priorityData)
     };
   }
 
@@ -85,293 +73,137 @@
     }
   }
 
-  function mergePostcodeCollections(collections) {
-    var features = [];
-
-    POSTCODE_LAYER_CONFIG.forEach(function (config, index) {
-      var collection = collections[index];
-      if (!collection || !Array.isArray(collection.features)) {
-        return;
-      }
-
-      collection.features.forEach(function (feature) {
-        if (!feature || !feature.geometry) {
-          return;
-        }
-
-        features.push({
-          type: "Feature",
-          geometry: feature.geometry,
-          properties: Object.assign({}, feature.properties || {}, {
-            postcodeArea: config.prefix,
-            zone: config.zone
-          })
-        });
-      });
-    });
-
-    if (features.length === 0) {
+  function createOutsideAreaData(priorityData) {
+    if (!priorityData || !Array.isArray(priorityData.features) || priorityData.features.length === 0) {
       return null;
     }
+
+    var rings = [];
+    priorityData.features.forEach(function (feature) {
+      if (!feature || !feature.geometry) {
+        return;
+      }
+      rings = rings.concat(getPrimaryOuterRings(feature.geometry));
+    });
+
+    if (rings.length === 0) {
+      return null;
+    }
+
+    var bounds = getRingBounds(rings);
+    if (!bounds) {
+      return null;
+    }
+    var paddedBounds = expandBounds(bounds, OUTSIDE_RING_PADDING_RATIO);
+    var outerRing = [
+      [paddedBounds.minX, paddedBounds.minY],
+      [paddedBounds.maxX, paddedBounds.minY],
+      [paddedBounds.maxX, paddedBounds.maxY],
+      [paddedBounds.minX, paddedBounds.maxY],
+      [paddedBounds.minX, paddedBounds.minY]
+    ];
 
     return {
       type: "FeatureCollection",
-      features: features
+      features: [
+        {
+          type: "Feature",
+          properties: {
+            name: "Outside of Priority Area",
+            zone: "outside"
+          },
+          geometry: {
+            type: "Polygon",
+            coordinates: [outerRing].concat(
+              rings.map(function (ring) {
+                return closeRing(ring);
+              })
+            )
+          }
+        }
+      ]
     };
   }
 
-  function applyBigginHillCorrection(postcodeData, boroughData) {
-    if (
-      !postcodeData ||
-      !Array.isArray(postcodeData.features) ||
-      !boroughData ||
-      !Array.isArray(boroughData.features)
-    ) {
-      return;
-    }
-
-    var alreadyAdded = postcodeData.features.some(function (feature) {
-      var props = feature && feature.properties ? feature.properties : {};
-      return props.correctionId === "biggin-hill";
-    });
-
-    if (alreadyAdded) {
-      return;
-    }
-
-    var bromleyFeature = boroughData.features.find(function (feature) {
-      var props = feature && feature.properties ? feature.properties : {};
-      return String(props.name || "").toLowerCase() === "bromley";
-    });
-
-    if (!bromleyFeature || !bromleyFeature.geometry) {
-      return;
-    }
-
-    var correctionGeometry = clipGeometryToBBox(
-      bromleyFeature.geometry,
-      BIGGIN_HILL_CORRECTION_BBOX
-    );
-
-    if (!correctionGeometry) {
-      return;
-    }
-
-    postcodeData.features.push({
-      type: "Feature",
-      geometry: correctionGeometry,
-      properties: {
-        name: "BR6",
-        description: "Biggin Hill surrounding coverage correction",
-        postcodeArea: "BR",
-        zone: "surrounding",
-        correctionId: "biggin-hill"
-      }
-    });
-  }
-
-  function clipGeometryToBBox(geometry, bbox) {
-    if (!geometry || !geometry.type) {
-      return null;
+  function getPrimaryOuterRings(geometry) {
+    if (!geometry || !geometry.type || !geometry.coordinates) {
+      return [];
     }
 
     if (geometry.type === "Polygon") {
-      var clippedPolygon = clipPolygonRingsToBBox(geometry.coordinates, bbox);
-      if (!clippedPolygon) {
-        return null;
-      }
-      return {
-        type: "Polygon",
-        coordinates: clippedPolygon
-      };
+      return geometry.coordinates.length ? [geometry.coordinates[0]] : [];
     }
 
     if (geometry.type === "MultiPolygon") {
-      var clippedPolygons = geometry.coordinates
-        .map(function (polygonRings) {
-          return clipPolygonRingsToBBox(polygonRings, bbox);
+      return geometry.coordinates
+        .map(function (polygon) {
+          return Array.isArray(polygon) && polygon.length ? polygon[0] : null;
         })
         .filter(Boolean);
+    }
 
-      if (clippedPolygons.length === 0) {
-        return null;
+    return [];
+  }
+
+  function getRingBounds(rings) {
+    var bounds = {
+      minX: Infinity,
+      minY: Infinity,
+      maxX: -Infinity,
+      maxY: -Infinity
+    };
+
+    rings.forEach(function (ring) {
+      if (!Array.isArray(ring)) {
+        return;
       }
+      ring.forEach(function (point) {
+        if (!Array.isArray(point) || point.length < 2) {
+          return;
+        }
+        var lng = point[0];
+        var lat = point[1];
+        if (lng < bounds.minX) bounds.minX = lng;
+        if (lng > bounds.maxX) bounds.maxX = lng;
+        if (lat < bounds.minY) bounds.minY = lat;
+        if (lat > bounds.maxY) bounds.maxY = lat;
+      });
+    });
 
-      if (clippedPolygons.length === 1) {
-        return {
-          type: "Polygon",
-          coordinates: clippedPolygons[0]
-        };
-      }
-
-      return {
-        type: "MultiPolygon",
-        coordinates: clippedPolygons
-      };
+    if (!Number.isFinite(bounds.minX) || !Number.isFinite(bounds.minY) || !Number.isFinite(bounds.maxX) || !Number.isFinite(bounds.maxY)) {
+      return null;
     }
 
-    return null;
+    return bounds;
   }
 
-  function clipPolygonRingsToBBox(rings, bbox) {
-    if (!Array.isArray(rings) || rings.length === 0) {
-      return null;
-    }
+  function expandBounds(bounds, paddingRatio) {
+    var width = bounds.maxX - bounds.minX;
+    var height = bounds.maxY - bounds.minY;
+    var maxSpan = Math.max(width, height);
+    var padX = maxSpan * paddingRatio;
+    var padY = maxSpan * paddingRatio;
 
-    var outerRing = clipRingToBBox(rings[0], bbox);
-    if (!outerRing) {
-      return null;
-    }
-
-    var holeRings = rings
-      .slice(1)
-      .map(function (ring) {
-        return clipRingToBBox(ring, bbox);
-      })
-      .filter(Boolean);
-
-    return [outerRing].concat(holeRings);
+    return {
+      minX: bounds.minX - padX,
+      minY: bounds.minY - padY,
+      maxX: bounds.maxX + padX,
+      maxY: bounds.maxY + padY
+    };
   }
 
-  function clipRingToBBox(ring, bbox) {
-    var points = normalizeRing(ring);
-    if (points.length < 3) {
-      return null;
-    }
-
-    points = clipAgainstVerticalEdge(points, bbox.minX, true);
-    points = clipAgainstVerticalEdge(points, bbox.maxX, false);
-    points = clipAgainstHorizontalEdge(points, bbox.minY, true);
-    points = clipAgainstHorizontalEdge(points, bbox.maxY, false);
-
-    points = dedupeSequentialPoints(points);
-    if (points.length < 3) {
-      return null;
-    }
-
-    var first = points[0];
-    var last = points[points.length - 1];
-    if (!pointsEqual(first, last)) {
-      points.push([first[0], first[1]]);
-    }
-
-    if (points.length < 4) {
-      return null;
-    }
-
-    return points;
-  }
-
-  function normalizeRing(ring) {
+  function closeRing(ring) {
     if (!Array.isArray(ring) || ring.length === 0) {
-      return [];
+      return ring;
     }
 
-    var normalized = ring.map(function (point) {
-      return [point[0], point[1]];
-    });
-
-    if (normalized.length > 1 && pointsEqual(normalized[0], normalized[normalized.length - 1])) {
-      normalized.pop();
+    var first = ring[0];
+    var last = ring[ring.length - 1];
+    if (first[0] === last[0] && first[1] === last[1]) {
+      return ring;
     }
 
-    return normalized;
-  }
-
-  function clipAgainstVerticalEdge(points, edgeX, isMinEdge) {
-    if (!Array.isArray(points) || points.length === 0) {
-      return [];
-    }
-
-    var output = [];
-    var previous = points[points.length - 1];
-    var previousInside = isMinEdge ? previous[0] >= edgeX : previous[0] <= edgeX;
-
-    points.forEach(function (current) {
-      var currentInside = isMinEdge ? current[0] >= edgeX : current[0] <= edgeX;
-
-      if (currentInside) {
-        if (!previousInside) {
-          output.push(intersectWithVertical(previous, current, edgeX));
-        }
-        output.push(current);
-      } else if (previousInside) {
-        output.push(intersectWithVertical(previous, current, edgeX));
-      }
-
-      previous = current;
-      previousInside = currentInside;
-    });
-
-    return output;
-  }
-
-  function clipAgainstHorizontalEdge(points, edgeY, isMinEdge) {
-    if (!Array.isArray(points) || points.length === 0) {
-      return [];
-    }
-
-    var output = [];
-    var previous = points[points.length - 1];
-    var previousInside = isMinEdge ? previous[1] >= edgeY : previous[1] <= edgeY;
-
-    points.forEach(function (current) {
-      var currentInside = isMinEdge ? current[1] >= edgeY : current[1] <= edgeY;
-
-      if (currentInside) {
-        if (!previousInside) {
-          output.push(intersectWithHorizontal(previous, current, edgeY));
-        }
-        output.push(current);
-      } else if (previousInside) {
-        output.push(intersectWithHorizontal(previous, current, edgeY));
-      }
-
-      previous = current;
-      previousInside = currentInside;
-    });
-
-    return output;
-  }
-
-  function intersectWithVertical(start, end, edgeX) {
-    var deltaX = end[0] - start[0];
-    if (deltaX === 0) {
-      return [edgeX, start[1]];
-    }
-
-    var ratio = (edgeX - start[0]) / deltaX;
-    var y = start[1] + ratio * (end[1] - start[1]);
-    return [edgeX, y];
-  }
-
-  function intersectWithHorizontal(start, end, edgeY) {
-    var deltaY = end[1] - start[1];
-    if (deltaY === 0) {
-      return [start[0], edgeY];
-    }
-
-    var ratio = (edgeY - start[1]) / deltaY;
-    var x = start[0] + ratio * (end[0] - start[0]);
-    return [x, edgeY];
-  }
-
-  function dedupeSequentialPoints(points) {
-    if (!Array.isArray(points) || points.length === 0) {
-      return [];
-    }
-
-    var deduped = [points[0]];
-    for (var index = 1; index < points.length; index += 1) {
-      if (!pointsEqual(points[index], points[index - 1])) {
-        deduped.push(points[index]);
-      }
-    }
-    return deduped;
-  }
-
-  function pointsEqual(a, b) {
-    return !!a && !!b && a[0] === b[0] && a[1] === b[1];
+    return ring.concat([[first[0], first[1]]]);
   }
 
   function renderMap(node, mapData) {
@@ -388,66 +220,72 @@
       attribution: "&copy; OpenStreetMap contributors"
     }).addTo(map);
 
+    map.createPane("outsidePane");
+    map.getPane("outsidePane").style.zIndex = 390;
+    map.createPane("boroughPane");
+    map.getPane("boroughPane").style.zIndex = 395;
+    map.createPane("primaryPane");
+    map.getPane("primaryPane").style.zIndex = 410;
+
     var boroughLayer = null;
+    var outsideLayer = null;
 
-    var postcodeLayer = L.geoJSON(mapData.postcodeData, {
-      style: stylePostcodeFeature,
-      onEachFeature: function (feature, layer) {
-        var props = feature.properties || {};
-        var name = props.name || "Postcode District";
-        var zone = getZoneForFeature(feature);
-        var zoneText = getZoneText(zone);
-
-        if (zone === "core") {
-          layer.bindPopup("<strong>" + escapeHtml(name) + "</strong><br>Primary Coverage");
-          return;
+    if (mapData.outsideData) {
+      outsideLayer = L.geoJSON(mapData.outsideData, {
+        pane: "outsidePane",
+        smoothFactor: 0,
+        style: styleOutsideFeature,
+        onEachFeature: function (_feature, layer) {
+          layer.bindPopup("<strong>Outside of Priority Area</strong>");
         }
+      }).addTo(map);
+    }
 
-        if (zone === "surrounding") {
-          layer.bindPopup("<strong>" + escapeHtml(name) + "</strong><br>Surrounding Coverage");
-          return;
-        }
-
-        layer.bindPopup("<strong>" + escapeHtml(name) + "</strong><br>" + zoneText);
+    var priorityLayer = L.geoJSON(mapData.priorityData, {
+      pane: "primaryPane",
+      smoothFactor: 0,
+      style: stylePrimaryFeature,
+      onEachFeature: function (_feature, layer) {
+        layer.bindPopup("<strong>Primary Coverage</strong><br>" + PRIMARY_COVERAGE_AREAS);
       }
     });
 
     if (mapData.boroughData) {
       boroughLayer = L.geoJSON(mapData.boroughData, {
-        style: styleBoroughFeature,
-        onEachFeature: function (feature, layer) {
-          var props = feature.properties || {};
-          var name = props.name || "Borough";
-          layer.bindPopup("<strong>" + escapeHtml(name) + "</strong><br>Outside of priority area");
-        }
+        pane: "boroughPane",
+        smoothFactor: 0.1,
+        interactive: false,
+        style: styleBoroughFeature
       }).addTo(map);
     }
 
-    postcodeLayer.addTo(map);
+    priorityLayer.addTo(map);
 
-    var focusBounds = getFocusBounds(postcodeLayer);
+    var focusBounds = getFocusBounds(outsideLayer || priorityLayer);
     if (focusBounds && focusBounds.isValid()) {
-      map.fitBounds(focusBounds.pad(0.08));
-      map.setMaxBounds(focusBounds.pad(0.65));
+      map.fitBounds(focusBounds);
+      map.setMaxBounds(focusBounds.pad(0.25));
     } else if (boroughLayer && boroughLayer.getBounds().isValid()) {
       map.fitBounds(boroughLayer.getBounds().pad(0.08));
     }
 
     if (variant === "home") {
-      map.setZoom(Math.max(9.8, map.getZoom() - 0.2));
+      map.setZoom(Math.max(10.1, map.getZoom() - 0.08));
     } else {
-      map.setZoom(Math.max(10.25, map.getZoom()));
+      map.setZoom(Math.max(10.6, map.getZoom()));
     }
 
-    L.circleMarker(SW11_COORDS, {
+    L.circleMarker(SERVICE_BASE_COORDS, {
       radius: 6,
       weight: 2,
       color: "#ffffff",
       fillColor: "#7d0f0f",
       fillOpacity: 1
     })
-      .bindPopup("<strong>SW11 3GU</strong><br>Core service base")
+      .bindPopup("<strong>South West London</strong><br>Service base")
       .addTo(map);
+
+    addTownMarkers(map, variant);
 
     L.control
       .scale({
@@ -461,52 +299,53 @@
     });
   }
 
-  function stylePostcodeFeature(feature) {
-    var zone = getZoneForFeature(feature);
+  function addTownMarkers(map, variant) {
+    if (variant !== "detail") {
+      return;
+    }
 
-    if (zone === "core") {
-      return {
-        color: "#ffcdcd",
-        weight: 1.6,
+    COVERAGE_TOWNS.forEach(function (town) {
+      L.circleMarker(town.coords, {
+        radius: 4,
+        weight: 1,
+        color: "#ffffff",
         fillColor: CORE_COLOR,
-        fillOpacity: 0.46
-      };
-    }
+        fillOpacity: 0.92
+      })
+        .bindPopup("<strong>" + escapeHtml(town.name) + "</strong><br>Primary Coverage")
+        .addTo(map);
+    });
+  }
 
-    if (zone === "surrounding") {
-      return {
-        color: "#f4d6d6",
-        weight: 1.1,
-        fillColor: SURROUNDING_COLOR,
-        fillOpacity: 0.21
-      };
-    }
-
+  function styleOutsideFeature() {
     return {
-      color: "#a5afbf",
-      weight: 0.9,
+      color: "#5f6f86",
+      weight: 0.95,
       fillColor: OUTSIDE_COLOR,
-      fillOpacity: 0.06
+      fillOpacity: 0.055,
+      fillRule: "evenodd"
+    };
+  }
+
+  function stylePrimaryFeature() {
+    return {
+      color: "#b01f1f",
+      weight: 1.1,
+      opacity: 0.85,
+      fillColor: CORE_COLOR,
+      fillOpacity: 0.54,
+      lineJoin: "round",
+      fillRule: "nonzero"
     };
   }
 
   function styleBoroughFeature() {
     return {
       color: "#5f6f86",
-      weight: 0.95,
-      fillColor: OUTSIDE_COLOR,
-      fillOpacity: 0.045
+      weight: 0.75,
+      opacity: 0.45,
+      fill: false
     };
-  }
-
-  function getZoneText(zone) {
-    if (zone === "core") {
-      return "Primary Coverage";
-    }
-    if (zone === "surrounding") {
-      return "Surrounding Coverage";
-    }
-    return "Outside of priority area";
   }
 
   function getFocusBounds(layer) {
@@ -522,19 +361,4 @@
       .replaceAll("'", "&#039;");
   }
 
-  function getZoneForFeature(feature) {
-    var props = feature && feature.properties ? feature.properties : {};
-    var zone = props.zone;
-    var postcodeArea = String(props.postcodeArea || "").toUpperCase();
-
-    if (zone === "core" || CORE_POSTCODE_PREFIXES.has(postcodeArea)) {
-      return "core";
-    }
-
-    if (zone === "surrounding" || SURROUNDING_POSTCODE_PREFIXES.has(postcodeArea)) {
-      return "surrounding";
-    }
-
-    return "outside";
-  }
 })();

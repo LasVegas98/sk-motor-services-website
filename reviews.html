@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Customer Reviews | SK Motors</title>
-  <meta name="description" content="Read customer feedback for SK Motors. 5.0 rated mobile mechanic services in South West London.">
+  <title>Customer Reviews | SK Motor Services UK</title>
+  <meta name="description" content="Read customer feedback for SK Motor Services UK. 5.0 rated mobile mechanic services with primary coverage in Brixton, Wandsworth, Mitcham, Sutton, Morden, Cheam, New Malden, and Epsom.">
   <meta name="theme-color" content="#0b0d12">
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Reviews | SK Motors">
-  <meta property="og:description" content="See what customers say about SK Motors mobile mechanic services.">
+  <meta property="og:title" content="Reviews | SK Motor Services UK">
+  <meta property="og:description" content="See what customers say about SK Motor Services UK mobile mechanic services.">
   <meta property="og:image" content="assets/img/og-image.jpg">
   <meta property="og:url" content="/reviews.html">
   <meta name="twitter:card" content="summary_large_image">
@@ -17,15 +17,28 @@
   <link rel="stylesheet" href="assets/css/styles.css">
   <script src="assets/js/site-config.js" defer></script>
   <script src="assets/js/main.js" defer></script>
-  <script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token":"YOUR_CLOUDFLARE_WEB_ANALYTICS_TOKEN"}'></script>
+  <script>
+    (function () {
+      var token = "YOUR_CLOUDFLARE_WEB_ANALYTICS_TOKEN";
+      if (!token || token === "YOUR_CLOUDFLARE_WEB_ANALYTICS_TOKEN") {
+        return;
+      }
+
+      var script = document.createElement("script");
+      script.defer = true;
+      script.src = "https://static.cloudflareinsights.com/beacon.min.js";
+      script.setAttribute("data-cf-beacon", JSON.stringify({ token: token }));
+      document.head.appendChild(script);
+    })();
+  </script>
 </head>
 <body data-page="reviews">
   <a class="skip-link" href="#main-content">Skip to main content</a>
 
   <header class="site-header">
     <div class="container header-inner">
-      <a class="brand" href="index.html" aria-label="SK Motors home">
-        <img src="assets/img/logo-main.png" alt="SK Motors logo">
+      <a class="brand" href="index.html" aria-label="SK Motor Services UK home">
+        <img src="assets/img/logo-main.png" alt="SK Motor Services UK">
       </a>
       <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" data-nav-toggle>
         Menu
@@ -51,7 +64,7 @@
         <p class="kicker">Customer feedback</p>
         <h1>5.0-star rated service</h1>
         <p class="lead">
-          Real feedback from local customers who used our mobile mechanic services across South West London.
+          Real feedback from local customers who used our mobile mechanic services across the primary coverage zone.
         </p>
       </div>
     </section>
@@ -118,3 +131,5 @@
   </div>
 </body>
 </html>
+
+

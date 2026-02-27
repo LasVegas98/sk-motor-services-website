@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mobile Mechanic in South West London | SK Motors</title>
-  <meta name="description" content="SK Motors provides mobile mechanic services for cars and vans across South West London and nearby areas. Call, WhatsApp, or request a quick quote.">
+  <title>Mobile Mechanic in South West London | SK Motor Services UK</title>
+  <meta name="description" content="SK Motor Services UK provides mobile mechanic services for cars and vans with primary coverage in Brixton, Wandsworth, Mitcham, Sutton, Morden, Cheam, New Malden, and Epsom. Call, WhatsApp, or request a quick quote.">
   <meta name="theme-color" content="#0b0d12">
   <meta property="og:type" content="website">
-  <meta property="og:title" content="SK Motors | Mobile Mechanic South West London">
+  <meta property="og:title" content="SK Motor Services UK | Mobile Mechanic South West London">
   <meta property="og:description" content="Reliable mobile car and van mechanical services in South West London. 5.0 rated service with quick response.">
   <meta property="og:image" content="assets/img/og-image.jpg">
   <meta property="og:url" content="/">
@@ -20,15 +20,28 @@
   <script src="assets/js/main.js" defer></script>
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" defer></script>
   <script src="assets/js/coverage-map.js" defer></script>
-  <script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token":"YOUR_CLOUDFLARE_WEB_ANALYTICS_TOKEN"}'></script>
+  <script>
+    (function () {
+      var token = "YOUR_CLOUDFLARE_WEB_ANALYTICS_TOKEN";
+      if (!token || token === "YOUR_CLOUDFLARE_WEB_ANALYTICS_TOKEN") {
+        return;
+      }
+
+      var script = document.createElement("script");
+      script.defer = true;
+      script.src = "https://static.cloudflareinsights.com/beacon.min.js";
+      script.setAttribute("data-cf-beacon", JSON.stringify({ token: token }));
+      document.head.appendChild(script);
+    })();
+  </script>
 </head>
 <body data-page="home">
   <a class="skip-link" href="#main-content">Skip to main content</a>
 
   <header class="site-header">
     <div class="container header-inner">
-      <a class="brand" href="index.html" aria-label="SK Motors home">
-        <img src="assets/img/logo-main.png" alt="SK Motors logo">
+      <a class="brand" href="index.html" aria-label="SK Motor Services UK home">
+        <img src="assets/img/logo-main.png" alt="SK Motor Services UK">
       </a>
       <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" data-nav-toggle>
         Menu
@@ -56,8 +69,8 @@
             <p class="kicker">Mobile mechanic support in South West London</p>
             <h1>Professional car and van repairs at your address</h1>
             <p class="lead">
-              <span data-config="businessName"></span> delivers mobile vehicle maintenance and repairs across SW London,
-              with surrounding areas available depending on schedule.
+              <span data-config="businessName"></span> delivers mobile vehicle maintenance and repairs across
+              Brixton, Wandsworth, Mitcham, Sutton, Morden, Cheam, New Malden, and Epsom.
             </p>
             <p class="response-line" data-config="responseWindowText"></p>
             <div class="cta-row cta-cluster">
@@ -92,7 +105,7 @@
             <p class="stat-label">Customer Reviews</p>
           </article>
           <article class="stat-card" data-reveal data-reveal-style="scale">
-            <p class="stat-value">SW London</p>
+            <p class="stat-value">South West London</p>
             <p class="stat-label">Core Service Area</p>
           </article>
           <article class="stat-card" data-reveal data-reveal-style="scale">
@@ -138,22 +151,18 @@
             <p class="lead">
               <span data-config="coreCoverageLabel"></span>
               <br>
-              <span data-config="surroundingCoverageLabel"></span>
+              <span data-config="outsideCoverageLabel"></span>
             </p>
             <div class="coverage-support surface-card">
               <p class="coverage-support-title">Coverage at a glance</p>
               <ul class="coverage-zone-list">
                 <li class="coverage-zone-item">
-                  <span class="coverage-zone-label">Primary zone</span>
-                  <span class="coverage-zone-value"><span class="legend-dot legend-core"></span>SW</span>
+                  <span class="coverage-zone-label">Primary Coverage</span>
+                  <span class="coverage-zone-value"><span class="legend-dot legend-core"></span>Brixton, Wandsworth, Mitcham, Sutton, Morden, Cheam, New Malden, Epsom</span>
                 </li>
                 <li class="coverage-zone-item">
-                  <span class="coverage-zone-label">Surrounding zones</span>
-                  <span class="coverage-zone-value"><span class="legend-dot legend-surrounding"></span>CR, SM, KT, SE, TW, BR</span>
-                </li>
-                <li class="coverage-zone-item">
-                  <span class="coverage-zone-label">Outside of priority area</span>
-                  <span class="coverage-zone-value"><span class="legend-dot legend-outside"></span>Available subject to route and schedule.</span>
+                  <span class="coverage-zone-label">Outside of Priority Area</span>
+                  <span class="coverage-zone-value"><span class="legend-dot legend-outside"></span>All locations beyond the primary coverage zone.</span>
                 </li>
               </ul>
               <p class="coverage-note">Send your postcode by phone or WhatsApp for the fastest confirmation.</p>
@@ -161,9 +170,9 @@
             </div>
           </div>
           <figure class="coverage-teaser" data-reveal data-reveal-style="slide-right">
-            <div id="coverage-map-home" class="coverage-map coverage-map-home" data-map-variant="home" aria-label="Coverage map of South West London core service area and nearby surrounding areas"></div>
+            <div id="coverage-map-home" class="coverage-map coverage-map-home" data-map-variant="home" aria-label="Coverage map showing primary coverage in Brixton, Wandsworth, Mitcham, Sutton, Morden, Cheam, New Malden, and Epsom, with all other locations marked as outside of priority area"></div>
             <noscript>
-              <img src="assets/img/coverage-map.svg" alt="Illustrated map showing South West London primary service zone and surrounding areas">
+              <img src="assets/img/coverage-map.svg" alt="Illustrated map showing primary coverage in Brixton, Wandsworth, Mitcham, Sutton, Morden, Cheam, New Malden, and Epsom, with all other locations outside of priority area">
             </noscript>
           </figure>
         </div>
@@ -226,3 +235,4 @@
   </div>
 </body>
 </html>
+

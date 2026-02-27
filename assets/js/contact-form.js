@@ -65,7 +65,7 @@
 
   function buildWhatsAppMessage(payload) {
     return [
-      "New quote request - SK Motors",
+      "New quote request - SK Motor Services UK",
       "",
       "Name: " + payload.name,
       "Phone: " + payload.phone,

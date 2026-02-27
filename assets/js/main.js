@@ -355,15 +355,43 @@
           name: "South West London"
         },
         {
-          "@type": "AdministrativeArea",
-          name: "Greater London"
+          "@type": "Place",
+          name: "Brixton"
+        },
+        {
+          "@type": "Place",
+          name: "Wandsworth"
+        },
+        {
+          "@type": "Place",
+          name: "Mitcham"
+        },
+        {
+          "@type": "Place",
+          name: "Sutton"
+        },
+        {
+          "@type": "Place",
+          name: "Morden"
+        },
+        {
+          "@type": "Place",
+          name: "Cheam"
+        },
+        {
+          "@type": "Place",
+          name: "New Malden"
+        },
+        {
+          "@type": "Place",
+          name: "Epsom"
         }
       ],
       address: {
         "@type": "PostalAddress",
-        postalCode: config.postcode,
-        addressCountry: "GB",
-        addressLocality: "South West London"
+        addressLocality: "South West London",
+        addressRegion: "Greater London",
+        addressCountry: "GB"
       },
       sameAs: [config.instagramUrl, config.googleReviewsUrl],
       description:
