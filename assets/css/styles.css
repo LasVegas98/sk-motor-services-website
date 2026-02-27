@@ -1245,17 +1245,17 @@ body[data-page="services"] .service-card {
 
 @media (max-width: 1024px) {
   .header-inner {
-    min-height: 74px;
+    min-height: 78px;
     grid-template-columns: auto auto;
     grid-template-areas:
       "brand toggle"
       "nav nav";
-    padding: 0.62rem 0;
+    padding: 0.7rem 0;
   }
 
   .brand {
     grid-area: brand;
-    width: clamp(176px, 52vw, 260px);
+    width: clamp(196px, 56vw, 280px);
   }
 
   .nav-toggle {
@@ -1292,12 +1292,12 @@ body[data-page="services"] .service-card {
   }
 
   .section {
-    padding-top: 1.9rem;
-    padding-bottom: 1.9rem;
+    padding-top: 1.75rem;
+    padding-bottom: 1.75rem;
   }
 
   .section-shell {
-    padding: 1.02rem;
+    padding: 0.98rem;
   }
 
   .hero-copy {
@@ -1337,6 +1337,93 @@ body[data-page="services"] .service-card {
   .footer-bottom {
     padding-bottom: 5rem;
   }
+
+  .sticky-cta a {
+    min-height: 56px;
+    font-size: 1rem;
+  }
+
+  .sticky-cta a:nth-child(1) {
+    background: linear-gradient(135deg, var(--brand-red), var(--brand-red-strong));
+    color: #fff;
+  }
+
+  .sticky-cta a:nth-child(2) {
+    background: linear-gradient(135deg, var(--brand-green), var(--brand-green-strong));
+    color: #08140e;
+  }
+
+  .sticky-cta a:nth-child(3) {
+    background: linear-gradient(165deg, rgba(148, 164, 190, 0.26), rgba(148, 164, 190, 0.08));
+    color: var(--text-050);
+  }
+}
+
+@media (max-width: 640px) {
+  h1 {
+    font-size: clamp(1.9rem, 8.5vw, 2.35rem);
+    line-height: 1.04;
+  }
+
+  .header-inner {
+    min-height: 74px;
+    padding: 0.62rem 0;
+  }
+
+  .brand {
+    width: clamp(188px, 60vw, 248px);
+  }
+
+  .nav-toggle {
+    padding: 0.46rem 0.86rem;
+  }
+
+  .section-shell,
+  .map-shell,
+  .coverage-teaser,
+  .map-figure,
+  .quote-form-wrap {
+    border-radius: 16px;
+  }
+
+  .panel-card,
+  .service-card,
+  .review-card {
+    border-radius: 12px;
+    padding: 0.94rem;
+  }
+
+  .section-shell::after {
+    right: -20%;
+    bottom: -50%;
+    width: min(74%, 320px);
+    filter: blur(18px);
+    opacity: 0.76;
+  }
+
+  .rating-summary::after {
+    right: -16%;
+    bottom: -52%;
+    width: min(70%, 290px);
+    filter: blur(16px);
+    opacity: 0.76;
+  }
+
+  .contact-accent-panel::after {
+    right: -20%;
+    bottom: -52%;
+    width: min(74%, 300px);
+    filter: blur(18px);
+    opacity: 0.76;
+  }
+
+  .coverage-map-home {
+    height: 330px;
+  }
+
+  .coverage-map-detail {
+    height: 440px;
+  }
 }
 
 @media (max-width: 480px) {
@@ -1357,6 +1444,20 @@ body[data-page="services"] .service-card {
 
   .hero-tags li {
     font-size: 0.8rem;
+  }
+
+  .section {
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+  }
+
+  .site-header {
+    backdrop-filter: blur(10px);
+  }
+
+  .sticky-cta a {
+    min-height: 54px;
+    font-size: 0.97rem;
   }
 }
 
