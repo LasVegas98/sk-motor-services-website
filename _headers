@@ -16,9 +16,6 @@
 /contact.html
   Cache-Control: public, max-age=0, must-revalidate
 
-/favicon.svg
-  Cache-Control: public, max-age=0, must-revalidate
-
 /favicon.ico
   Cache-Control: public, max-age=0, must-revalidate
 
