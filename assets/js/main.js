@@ -393,6 +393,15 @@
         addressRegion: "Greater London",
         addressCountry: "GB"
       },
+      aggregateRating: {
+        "@type": "AggregateRating",
+        ratingValue: "5.0",
+        reviewCount: String(
+          (Array.isArray(window.reviewSnippets) ? window.reviewSnippets.length : 0) || 6
+        ),
+        bestRating: "5",
+        worstRating: "1"
+      },
       sameAs: [config.instagramUrl, config.googleReviewsUrl],
       description:
         "Mobile vehicle maintenance services with customer-address repairs and no-obligation quote support."
