@@ -54,3 +54,24 @@
 
 /site.webmanifest
   Cache-Control: public, max-age=0, must-revalidate
+
+/wrench-favicon.svg
+  Cache-Control: public, max-age=0, must-revalidate
+
+/wrench-favicon.ico
+  Cache-Control: public, max-age=0, must-revalidate
+
+/wrench-favicon-16x16.png
+  Cache-Control: public, max-age=0, must-revalidate
+
+/wrench-favicon-32x32.png
+  Cache-Control: public, max-age=0, must-revalidate
+
+/wrench-apple-touch-icon.png
+  Cache-Control: public, max-age=0, must-revalidate
+
+/wrench-android-chrome-192x192.png
+  Cache-Control: public, max-age=0, must-revalidate
+
+/wrench-android-chrome-512x512.png
+  Cache-Control: public, max-age=0, must-revalidate

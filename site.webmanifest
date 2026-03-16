@@ -3,17 +3,17 @@
   "short_name": "SK Motor",
   "icons": [
     {
-      "src": "sk-android-chrome-192x192.png?v=20260316k",
+      "src": "wrench-android-chrome-192x192.png?v=20260316l",
       "sizes": "192x192",
       "type": "image/png"
     },
     {
-      "src": "sk-android-chrome-512x512.png?v=20260316k",
+      "src": "wrench-android-chrome-512x512.png?v=20260316l",
       "sizes": "512x512",
       "type": "image/png"
     }
   ],
-  "theme_color": "#000000",
-  "background_color": "#000000",
+  "theme_color": "#0b0b0b",
+  "background_color": "#0b0b0b",
   "display": "standalone"
 }
