@@ -25,13 +25,31 @@
 /favicon-32x32.png
   Cache-Control: public, max-age=0, must-revalidate
 
+/sk-favicon.ico
+  Cache-Control: public, max-age=0, must-revalidate
+
+/sk-favicon-16x16.png
+  Cache-Control: public, max-age=0, must-revalidate
+
+/sk-favicon-32x32.png
+  Cache-Control: public, max-age=0, must-revalidate
+
 /apple-touch-icon.png
+  Cache-Control: public, max-age=0, must-revalidate
+
+/sk-apple-touch-icon.png
   Cache-Control: public, max-age=0, must-revalidate
 
 /android-chrome-192x192.png
   Cache-Control: public, max-age=0, must-revalidate
 
 /android-chrome-512x512.png
+  Cache-Control: public, max-age=0, must-revalidate
+
+/sk-android-chrome-192x192.png
+  Cache-Control: public, max-age=0, must-revalidate
+
+/sk-android-chrome-512x512.png
   Cache-Control: public, max-age=0, must-revalidate
 
 /site.webmanifest

@@ -3,12 +3,12 @@
   "short_name": "SK Motor",
   "icons": [
     {
-      "src": "android-chrome-192x192.png?v=20260316j",
+      "src": "sk-android-chrome-192x192.png?v=20260316k",
       "sizes": "192x192",
       "type": "image/png"
     },
     {
-      "src": "android-chrome-512x512.png?v=20260316j",
+      "src": "sk-android-chrome-512x512.png?v=20260316k",
       "sizes": "512x512",
       "type": "image/png"
     }

@@ -103,4 +103,11 @@ Write-Ico (Join-Path $root 'favicon.ico') @(
   (Join-Path $root 'favicon-64x64.png')
 )
 
+Copy-Item (Join-Path $root 'favicon-16x16.png') (Join-Path $root 'sk-favicon-16x16.png') -Force
+Copy-Item (Join-Path $root 'favicon-32x32.png') (Join-Path $root 'sk-favicon-32x32.png') -Force
+Copy-Item (Join-Path $root 'favicon.ico') (Join-Path $root 'sk-favicon.ico') -Force
+Copy-Item (Join-Path $root 'apple-touch-icon.png') (Join-Path $root 'sk-apple-touch-icon.png') -Force
+Copy-Item (Join-Path $root 'android-chrome-192x192.png') (Join-Path $root 'sk-android-chrome-192x192.png') -Force
+Copy-Item (Join-Path $root 'android-chrome-512x512.png') (Join-Path $root 'sk-android-chrome-512x512.png') -Force
+
 Remove-Item (Join-Path $root 'favicon-48x48.png'), (Join-Path $root 'favicon-64x64.png'), $base
