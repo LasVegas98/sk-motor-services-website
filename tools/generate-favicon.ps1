@@ -65,9 +65,9 @@ if (-not (Test-Path $source)) {
 }
 
 $cropX = 280
-$cropY = 245
-$cropWidth = 800
-$cropHeight = 420
+$cropY = 200
+$cropWidth = 620
+$cropHeight = 360
 $sidePad = 0
 $base = Join-Path $root 'favicon-base-512.png'
 
