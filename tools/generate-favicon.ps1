@@ -64,11 +64,11 @@ if (-not (Test-Path $source)) {
   throw "Source favicon artwork not found: $source"
 }
 
-$cropX = 210
-$cropY = 230
-$cropWidth = 1080
-$cropHeight = 455
-$sidePad = 2
+$cropX = 280
+$cropY = 245
+$cropWidth = 800
+$cropHeight = 420
+$sidePad = 0
 $base = Join-Path $root 'favicon-base-512.png'
 
 $src = [System.Drawing.Image]::FromFile($source)
