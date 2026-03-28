@@ -1410,6 +1410,29 @@ body[data-page="services"] .service-card {
     opacity: 0.64;
   }
 
+  .service-assurances-shell::after,
+  .reviews-hero-shell::after,
+  .contact-hero-shell::after {
+    display: none;
+  }
+
+  .rating-summary-shell {
+    background:
+      linear-gradient(0deg, rgba(225, 29, 47, 0.08), rgba(225, 29, 47, 0.08)),
+      linear-gradient(0deg, rgba(23, 33, 49, 0.84), rgba(23, 33, 49, 0.84));
+  }
+
+  .rating-summary {
+    background:
+      linear-gradient(0deg, rgba(225, 29, 47, 0.12), rgba(225, 29, 47, 0.12)),
+      linear-gradient(0deg, rgba(22, 32, 48, 0.86), rgba(22, 32, 48, 0.86));
+  }
+
+  .rating-summary-shell::after,
+  .rating-summary::after {
+    display: none;
+  }
+
   .coverage-map-home {
     height: 330px;
   }
