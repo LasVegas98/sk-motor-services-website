@@ -715,9 +715,6 @@ body.is-scrolled .header-inner {
   border: 1px solid rgba(225, 29, 47, 0.38);
   border-radius: var(--radius-lg);
   padding: clamp(1.15rem, 1rem + 1.1vw, 2rem);
-  background:
-    linear-gradient(162deg, rgba(225, 29, 47, 0.22), rgba(18, 26, 39, 0.5)),
-    linear-gradient(60deg, rgba(148, 164, 190, 0.2), rgba(12, 19, 30, 0.42));
   box-shadow: var(--shadow-lg);
 }
 
@@ -749,7 +746,9 @@ body[data-page="services"] .service-card {
   border: 1px solid var(--line-faint);
   border-radius: var(--radius-lg);
   padding: clamp(1.2rem, 1rem + 0.9vw, 1.8rem);
-  background: linear-gradient(162deg, rgba(225, 29, 47, 0.18), rgba(16, 23, 36, 0.78));
+  background:
+    linear-gradient(0deg, rgba(225, 29, 47, 0.14), rgba(225, 29, 47, 0.14)),
+    linear-gradient(0deg, rgba(22, 32, 48, 0.86), rgba(22, 32, 48, 0.86));
   box-shadow: var(--shadow-md);
   width: 100%;
   max-width: none;
@@ -762,24 +761,18 @@ body[data-page="services"] .service-card {
   align-items: center;
 }
 
+.rating-summary-shell {
+  background:
+    linear-gradient(0deg, rgba(225, 29, 47, 0.1), rgba(225, 29, 47, 0.1)),
+    linear-gradient(165deg, rgba(23, 33, 49, 0.82), rgba(12, 19, 30, 0.88));
+}
+
+.rating-summary-shell::after {
+  display: none;
+}
+
 .rating-summary::after {
-  content: "";
-  position: absolute;
-  right: -12%;
-  bottom: -46%;
-  width: min(56%, 360px);
-  aspect-ratio: 1 / 1;
-  border-radius: 999px;
-  pointer-events: none;
-  background: radial-gradient(
-    circle at center,
-    rgba(225, 29, 47, 0.34) 0%,
-    rgba(225, 29, 47, 0.16) 34%,
-    rgba(225, 29, 47, 0.07) 52%,
-    rgba(225, 29, 47, 0) 76%
-  );
-  filter: blur(20px);
-  opacity: 0.8;
+  display: none;
 }
 
 .rating-main {
@@ -845,21 +838,21 @@ body[data-page="services"] .service-card {
 .contact-accent-panel::after {
   content: "";
   position: absolute;
-  right: -16%;
-  bottom: -44%;
-  width: min(62%, 360px);
+  right: -22%;
+  bottom: -50%;
+  width: min(58%, 340px);
   aspect-ratio: 1 / 1;
   border-radius: 999px;
   pointer-events: none;
   background: radial-gradient(
     circle at center,
-    rgba(225, 29, 47, 0.34) 0%,
-    rgba(225, 29, 47, 0.17) 34%,
-    rgba(225, 29, 47, 0.08) 52%,
+    rgba(225, 29, 47, 0.24) 0%,
+    rgba(225, 29, 47, 0.12) 34%,
+    rgba(225, 29, 47, 0.05) 52%,
     rgba(225, 29, 47, 0) 76%
   );
-  filter: blur(22px);
-  opacity: 0.82;
+  filter: blur(26px);
+  opacity: 0.7;
 }
 
 .contact-accent-title {
@@ -1402,19 +1395,19 @@ body[data-page="services"] .service-card {
   }
 
   .rating-summary::after {
-    right: -16%;
-    bottom: -52%;
-    width: min(70%, 290px);
-    filter: blur(16px);
-    opacity: 0.76;
+    right: -26%;
+    bottom: -62%;
+    width: min(56%, 230px);
+    filter: blur(20px);
+    opacity: 0.44;
   }
 
   .contact-accent-panel::after {
-    right: -20%;
-    bottom: -52%;
-    width: min(74%, 300px);
-    filter: blur(18px);
-    opacity: 0.76;
+    right: -26%;
+    bottom: -58%;
+    width: min(68%, 270px);
+    filter: blur(20px);
+    opacity: 0.64;
   }
 
   .coverage-map-home {
