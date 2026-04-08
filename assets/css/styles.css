@@ -549,6 +549,76 @@ body.is-scrolled .header-inner {
   grid-template-columns: repeat(auto-fit, minmax(225px, 1fr));
 }
 
+.coverage-hero-shell {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.3rem;
+}
+
+.coverage-pill-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.coverage-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.55rem 1.05rem;
+  border: 1px solid rgba(225, 29, 47, 0.45);
+  border-radius: 999px;
+  background: linear-gradient(135deg, rgba(225, 29, 47, 0.14), rgba(225, 29, 47, 0.04));
+  font-family: "Chakra Petch", sans-serif;
+  font-weight: 600;
+  font-size: 0.94rem;
+  color: var(--text-050);
+  letter-spacing: 0.02em;
+  transition: background 0.22s ease, border-color 0.22s ease;
+}
+
+.coverage-pill:hover {
+  background: linear-gradient(135deg, rgba(225, 29, 47, 0.24), rgba(225, 29, 47, 0.1));
+  border-color: rgba(225, 29, 47, 0.7);
+}
+
+.coverage-pill-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 999px;
+  background: var(--brand-red);
+  flex-shrink: 0;
+  box-shadow: 0 0 6px rgba(225, 29, 47, 0.8);
+}
+
+.coverage-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  padding: 1rem 1.1rem;
+  border: 1px solid var(--line-faint);
+  border-radius: var(--radius-md);
+  background: rgba(12, 18, 28, 0.55);
+  width: 100%;
+}
+
+.coverage-meta-row {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin: 0;
+  color: var(--text-150);
+  font-size: 0.97rem;
+}
+
+.coverage-meta-row strong {
+  color: var(--text-050);
+}
+
 .panel-card,
 .service-card,
 .review-card {
