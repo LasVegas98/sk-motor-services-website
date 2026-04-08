@@ -269,7 +269,7 @@
     var reviews = [];
 
     try {
-      var response = await fetch("assets/data/reviews.json", { cache: "no-store" });
+      var response = await fetch("assets/data/reviews.json");
       if (response.ok) {
         reviews = await response.json();
       }

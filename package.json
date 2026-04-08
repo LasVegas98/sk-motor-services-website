@@ -1,0 +1,8 @@
+{
+  "name": "sk-motor-services-uk",
+  "private": true,
+  "scripts": {
+    "dev": "npx serve . --listen 3000",
+    "start": "npx serve . --listen 3000"
+  }
+}

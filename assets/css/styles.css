@@ -1,5 +1,3 @@
-@import url("https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap");
-
 :root {
   --bg-990: #06080d;
   --bg-970: #090d14;
@@ -60,17 +58,7 @@ body::before {
   inset: 0;
   z-index: -1;
   pointer-events: none;
-  opacity: 0.33;
-  background:
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.05), transparent 26%),
-    repeating-linear-gradient(
-      -16deg,
-      rgba(148, 164, 190, 0.07) 0,
-      rgba(148, 164, 190, 0.07) 1px,
-      transparent 1px,
-      transparent 13px
-    );
-  mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.85), transparent 80%);
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.03), transparent 30%);
 }
 
 img {
@@ -746,9 +734,7 @@ body[data-page="services"] .service-card {
   border: 1px solid var(--line-faint);
   border-radius: var(--radius-lg);
   padding: clamp(1.2rem, 1rem + 0.9vw, 1.8rem);
-  background:
-    linear-gradient(0deg, rgba(225, 29, 47, 0.14), rgba(225, 29, 47, 0.14)),
-    linear-gradient(0deg, rgba(22, 32, 48, 0.86), rgba(22, 32, 48, 0.86));
+  background: linear-gradient(160deg, rgba(28, 39, 57, 0.72), rgba(13, 20, 31, 0.86));
   box-shadow: var(--shadow-md);
   width: 100%;
   max-width: none;
@@ -761,19 +747,6 @@ body[data-page="services"] .service-card {
   align-items: center;
 }
 
-.rating-summary-shell {
-  background:
-    linear-gradient(0deg, rgba(225, 29, 47, 0.1), rgba(225, 29, 47, 0.1)),
-    linear-gradient(165deg, rgba(23, 33, 49, 0.82), rgba(12, 19, 30, 0.88));
-}
-
-.rating-summary-shell::after {
-  display: none;
-}
-
-.rating-summary::after {
-  display: none;
-}
 
 .rating-main {
   margin: 0;
@@ -1410,26 +1383,7 @@ body[data-page="services"] .service-card {
     opacity: 0.64;
   }
 
-  .service-assurances-shell::after,
-  .reviews-hero-shell::after,
-  .contact-hero-shell::after {
-    display: none;
-  }
-
-  .rating-summary-shell {
-    background:
-      linear-gradient(0deg, rgba(225, 29, 47, 0.08), rgba(225, 29, 47, 0.08)),
-      linear-gradient(0deg, rgba(23, 33, 49, 0.84), rgba(23, 33, 49, 0.84));
-  }
-
-  .rating-summary {
-    background:
-      linear-gradient(0deg, rgba(225, 29, 47, 0.12), rgba(225, 29, 47, 0.12)),
-      linear-gradient(0deg, rgba(22, 32, 48, 0.86), rgba(22, 32, 48, 0.86));
-  }
-
-  .rating-summary-shell::after,
-  .rating-summary::after {
+  .section-shell::after {
     display: none;
   }
 
