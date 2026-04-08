@@ -468,12 +468,14 @@ body.is-scrolled .header-inner {
   border: 1px solid var(--line-faint);
   box-shadow: var(--shadow-lg);
   background: #0f1621;
+  display: flex;
+  flex-direction: column;
 }
 
 .hero-media img {
   width: 100%;
-  min-height: 290px;
-  max-height: 500px;
+  flex: 1 1 auto;
+  min-height: 260px;
   object-fit: cover;
 }
 
